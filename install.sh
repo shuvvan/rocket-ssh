@@ -2,7 +2,7 @@
 
 userInputs(){
 
-    echo -e "****** Welecome to installation of the Rocket SSH Panel ******"
+    echo -e "\n\n****** Welecome to installation of the Rocket SSH Panel ****** \n"
     printf "Default username is \e[33m${username}\e[0m, let it blank to use this username: "
     read usernameTmp
 
@@ -274,8 +274,6 @@ configAppche(){
 
     systemctl restart httpd
     systemctl enable httpd
-    systemctl enable stunnel4
-    systemctl restart stunnel4wait
     systemctl restart sshd
     sudo timedatectl set-timezone Asia/Tehran
     sudo systemctl restart apache2
@@ -350,15 +348,20 @@ ENDOFFILE
     chmod +x /var/www/html/kill.sh
     wait
     (crontab -l | grep . ; echo -e "* * * * * /var/www/html/kill.sh") | crontab -
-    (crontab -l ; echo "* * * * * wget -q -O /dev/null '$cronUrl' > /dev/null 2>&1") | crontab -
     
 }
 
 installationInfo(){
-    echo -e "\n **** Rocket SSH Paenl **** \n"
-    echo -e "Panel Link : $httpProtcol://${ipv4}:$panelPort/login"
-    echo -e "Username : ${username}"
-    echo -e "Password : ${password}"
+    clear
+    echo -e "\n"
+    bannerText=$(curl -s https://raw.githubusercontent.com/mahmoud-ap/rocket-ssh/master/rocket-banner.txt)
+    printf "%s" "$bannerText"
+    echo -e "\n"
+    printf "Panel Link : $httpProtcol://${ipv4}:$panelPort/login"
+    printf "\nUserName : \e[31m${username}\e[0m "
+    printf "\nPassword : \e[31m${password}\e[0m "
+    printf "\nSSH Port : \e[31m${sshPort}\e[0m "
+    printf "\nUDP Port : \e[31m${udpPort}\e[0m \n\n"
 }
 
 
@@ -376,7 +379,6 @@ sshPort=22
 panelPort=8081
 httpProtcol="http"
 panelPath=$(getPanelPath)
-panelPortPath="/var/www/html/panelport"
 nethogsLink=https://raw.githubusercontent.com/mahmoud-ap/nethogs-json/master/install.sh
 
 checkRoot
