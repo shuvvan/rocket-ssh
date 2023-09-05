@@ -67,6 +67,29 @@ getPanelPath(){
     echo $panelPathTmp
 }
 
+getSshPort(){
+    sed -i 's/#Port 22/Port 22/' /etc/ssh/sshd_config
+    po=$(cat /etc/ssh/sshd_config | grep "^Port")
+    port=$(echo "$po" | sed "s/Port //g")
+    if [ -z "$port" ]; then
+        port="22"  # Set default port to 22 if $port is empty
+    fi
+
+    echo "$port"
+}
+
+getPanelPort(){
+    env_file="/var/www/html/panel/.env"
+    local port_panel_value=$(grep "^PORT_PANEL=" "$env_file" | cut -d '=' -f 2-)
+
+    if [ -n "$port_panel_value" ]; then
+        echo "$port_panel_value"
+    else
+        echo "8081"  # Default value if PORT_PANEL is not found
+    fi
+
+}
+
 checkRoot() {
     if [ "$EUID" -ne 0 ]; then
         echo "Please run as root"
@@ -136,15 +159,21 @@ ENDOFFILE
 
 }
 
-
 copyPanelRepo(){
 
-    folder_path="/var/www/html/panel"
+    panelFolderPath="/var/www/html/panel"
+    accountFolderPath="/var/www/html/account"
 
-    if [ ! -d "$folder_path" ]; then
-        mkdir -p "$folder_path"
+    if [ ! -d "$panelFolderPath" ]; then
+        mkdir -p "$panelFolderPath"
     else
         rm -rf /var/www/html/panel
+    fi
+
+    if [ ! -d "$accountFolderPath" ]; then
+        mkdir -p "$accountFolderPath"
+    else
+        rm -rf /var/www/html/account
     fi
 
    link=https://github.com/mahmoud-ap/rocket-ssh/raw/master/app.zip
@@ -154,11 +183,12 @@ copyPanelRepo(){
         wait
         sudo wget -O /var/www/html/update.zip $link
         wait
-        sudo unzip -o /var/www/html/update.zip -d /var/www/html/panel &
+        sudo unzip -o /var/www/html/update.zip -d /var/www/html &
     else
         echo "Error extracting the ZIP file link."
         exit 1
     fi
+
     touch /var/www/html/panel/banner.txt
     wait
     echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/sbin/adduser' | sudo EDITOR='tee -a' visudo &
@@ -197,10 +227,17 @@ copyPanelRepo(){
     wait
     echo 'www-data ALL=(ALL:ALL) NOPASSWD:/usr/bin/netstat' | sudo EDITOR='tee -a' visudo &
     wait
+    echo 'www-data ALL=(ALL:ALL) NOPASSWD: /usr/bin/systemctl reboot' | sudo EDITOR='tee -a' visudo &
+    wait
     sudo chown -R www-data:www-data /var/www/html/panel
     wait
     chown www-data:www-data /var/www/html/panel/index.php
     wait
+    sudo chown -R www-data:www-data /var/www/html/account
+    wait
+    chown www-data:www-data /var/www/html/account/index.php
+    wait
+
     sudo a2enmod rewrite
     wait
     sudo service apache2 restart
@@ -213,37 +250,39 @@ copyPanelRepo(){
     wait
 }
 
-configAppche(){
+configAppache(){
     serverPort=${panelPort##*=}
     ##Remove the "" marks from the variable as they will not be needed
     serverPort=${panelPort//'"'}
-    echo "<VirtualHost *:80>
-            ServerAdmin webmaster@localhost
-            DocumentRoot /var/www/html/example
-            ErrorLog /error.log
-            CustomLog /access.log combined
-            <Directory '/var/www/html/example'>
-                AllowOverride All
-            </Directory>
-        </VirtualHost>
+     echo "<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
 
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        <Directory '/var/www/html'>
+            AllowOverride All
+        </Directory>
+        <Directory '/var/www/html/panel'>
+            Require all denied
+        </Directory>
+    </VirtualHost>
     <VirtualHost *:$panelPort>
-
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html/panel
-        
+
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 
         <Directory '/var/www/html/panel'>
             AllowOverride All
         </Directory>
-
     </VirtualHost>
-
     # vim: syntax=apache ts=4 sw=4 sts=4 sr noet" > /etc/apache2/sites-available/000-default.conf
     wait
     echo "sites-available"
+    
     ##Replace 'Virtual Hosts' and 'List' entries with the new port number
     sudo  sed -i.bak 's/.*NameVirtualHost.*/NameVirtualHost *:'$serverPort'/' /etc/apache2/ports.conf
     echo "Listen 80
@@ -251,7 +290,20 @@ configAppche(){
     <IfModule ssl_module>
         Listen 443
     </IfModule>
-
+    <IfModule mod_gnutls.c>
+        Listen 443
+    </IfModule>" > /etc/apache2/ports.conf
+    echo '#RocketSSH' > /var/www/rocketsshport
+    sudo sed -i -e '$a\'$'\n''rocketsshport '$serverPort /var/www/rocketsshport
+    wait
+    
+    ##Replace 'Virtual Hosts' and 'List' entries with the new port number
+    sudo  sed -i.bak 's/.*NameVirtualHost.*/NameVirtualHost *:'$serverPort'/' /etc/apache2/ports.conf
+    echo "Listen 80
+    Listen $serverPort
+    <IfModule ssl_module>
+        Listen 443
+    </IfModule>
     <IfModule mod_gnutls.c>
         Listen 443
     </IfModule>" > /etc/apache2/ports.conf
@@ -262,16 +314,13 @@ configAppche(){
     sudo /etc/init.d/apache2 reload
     sudo service apache2 restart
     chown www-data:www-data /var/www/html/panel/* &
+    chown www-data:www-data /var/www/html/account/* &
     wait
     systemctl restart mariadb &
     wait
     systemctl enable mariadb &
     wait
     sudo phpenmod curl
-    PHP_INI=$(php -i | grep /.+/php.ini -oE)
-    sed -i 's/extension=intl/;extension=intl/' ${PHP_INI}
-    wait
-
     systemctl restart httpd
     systemctl enable httpd
     systemctl restart sshd
@@ -284,16 +333,29 @@ installNethogs(){
 }
 
 configDatabase(){
-    dbName="RokcetSSH"
+    dbName="RocketSSH"
     dbPrefix="cp_"
     appVersion=$(getAppVersion)
-    mysql -e "create database RokcetSSH;" &
+    mysql -e "create database $dbName;" &
     wait
     mysql -e "CREATE USER '${username}'@'localhost' IDENTIFIED BY '${password}';" &
     wait
     mysql -e "GRANT ALL ON *.* TO '${username}'@'localhost';" &
     wait
-    mysql -u ${username} --password=${password} ${dbName} < /var/www/html/panel/assets/backup/db.sql
+
+    # Dump and remove the old database
+    if mysql -u root -e "USE RokcetSSH" 2>/dev/null; then
+        # Dump and restore the old database to the new database
+        mysqldump -u root --force RokcetSSH | mysql -u root $dbName
+        echo "Data has been dumped from 'RokcetSSH' to '$dbName'."
+
+        # Remove the old database
+        mysql -u root -e "DROP DATABASE RokcetSSH;"
+        echo "Old database 'RokcetSSH' has been removed."
+    else
+        echo "Database 'RokcetSSH' does not exist."
+    fi
+
     sed -i "s/DB_DATABASE=rocket_ssh/DB_DATABASE=${dbName}/" /var/www/html/panel/.env
     sed -i "s/DB_USERNAME=root/DB_USERNAME=$username/" /var/www/html/panel/.env
     sed -i "s/DB_PASSWORD=/DB_PASSWORD=$password/" /var/www/html/panel/.env
@@ -301,21 +363,27 @@ configDatabase(){
     sed -i "s/PORT_UDP=7302/PORT_UDP=$udpPort/" /var/www/html/panel/.env
     sed -i "s/PORT_PANEL=8081/PORT_PANEL=$panelPort/" /var/www/html/panel/.env
 
+    hashedPassword=$(php -r "echo password_hash('$password', PASSWORD_BCRYPT);")
+    nowTime=$(php -r "echo time();")
     #Insert or update
-    if [ -n "$username" -a "$username" != "NULL" ]
-        then 
-            hashedPassword=$(php -r "echo password_hash('$password', PASSWORD_BCRYPT);")
-            nowTime=$(php -r "echo time();")
+
+    adminTblName=${dbPrefix}admins
+    mysqlCmd="mysql -u'$username' -p'$password' -e 'USE $dbName; SHOW TABLES LIKE \"$adminTblName\";'"
+
+    if eval "$mysqlCmd" | grep -q "$adminTblName"; then 
             mysql -e "USE ${dbName}; UPDATE  ${dbPrefix}admins      SET username = '${username}' where id='1';"
             mysql -e "USE ${dbName}; UPDATE  ${dbPrefix}admins      SET password = '${hashedPassword}' where id='1';"
             mysql -e "USE ${dbName}; UPDATE  ${dbPrefix}settings    SET value = '${sshPort}' where name='ssh_port';"
             mysql -e "USE ${dbName}; UPDATE  ${dbPrefix}settings    SET value = '${udpPort}' where name='udp_port';"
             mysql -e "USE ${dbName}; UPDATE  ${dbPrefix}settings    SET value = '${appVersion}' where name='app_version';"
     else
-        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}admins  (username, password, fullname, role, credit, is_active, ctime, utime) VALUES ('${username}', '${password}', 'modir', 'admin', '0', '1', '${nowTime}','0');"
-        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}setting (name, value) VALUES ('ssh_port','${sshPort}');"
-        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}setting (name, value) VALUES ('udp_port','${udpPort}');"
-        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}setting (name, value) VALUES ('app_version','${appVersion}');"
+        mysql -u ${username} --password=${password} ${dbName} < /var/www/html/panel/assets/backup/db.sql
+        wait
+        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}admins  (username, password, fullname, role, credit, is_active, ctime, utime) VALUES ('${username}', '${hashedPassword}', 'modir', 'admin', '0', '1', '${nowTime}','0');"
+        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}settings (name, value) VALUES ('ssh_port','${sshPort}');"
+        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}settings (name, value) VALUES ('udp_port','${udpPort}');"
+        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}settings (name, value) VALUES ('app_version','${appVersion}');"
+        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}settings (name, value) VALUES ('calc_traffic','1');"
     fi
 }
 
@@ -323,32 +391,55 @@ configCronMaster(){
 
     crontab -r
     wait
-    cronUrl=$(echo "$httpProtcol://${ipv4}:$panelPort/cron/master")
-    cat > /var/www/html/kill.sh << ENDOFFILE
-            #!/bin/bash
-            #By Mahmoud
-            i=0
-            while [ 1i -lt 20 ]; do
-            cmd=(bbh '$cronUrl')
-            echo cmd &
-            sleep 6
-            i=(( i + 1 ))
-            done
-ENDOFFILE
 
+    cronUrl="$httpProtcol://$ipv4:$panelPort/cron/master"
+
+    # Define the file path to check
+    killFilePath="/var/www/html/kill.sh"
+
+    # Check if the file exists
+    if [ -e "$killFilePath" ]; then
+        # Remove the file
+        pkill -f kill.sh
+        rm "$killFilePath"
+    else
+        echo "File $killFilePath does not exist."
+    fi
+
+    cat > /var/www/html/cronjob.sh << ENDOFFILE
+    #!/bin/bash
+
+    curlUrl="tmpCurl"
+    lockfile="/tmp/call_url.lock"
+
+    # Check if the lock file exists
+    if [ -e "\$lockfile" ]; then
+        echo "Previous instance still running. Exiting."
+        exit 1
+    fi
+
+    # Create the lock file
+    touch "\$lockfile"
+
+    # Function to remove the lock file
+    cleanup() {
+        rm -f "\$lockfile"
+        exit
+    }
+    trap cleanup EXIT
+
+    while true; do
+        # Use curl to call the URL
+        curl -s -o -v -H /dev/null \$curlUrl &
+        sleep 5
+    done
+ENDOFFILE
     wait
-    sudo sed -i 's/(bbh/$(curl -v -H "A: B"/' /var/www/html/kill.sh
+    chmod +x /var/www/html/cronjob.sh
     wait
-    sudo sed -i 's/cmd/$cmd/' /var/www/html/kill.sh
+    sed -i "s|curlUrl=\"tmpCurl\"|curlUrl=\"$cronUrl\"|" /var/www/html/cronjob.sh
     wait
-    sudo sed -i 's/1i/$i/' /var/www/html/kill.sh
-    wait
-    sudo sed -i 's/((/$((/' /var/www/html/kill.sh
-    wait
-    chmod +x /var/www/html/kill.sh
-    wait
-    (crontab -l | grep . ; echo -e "* * * * * /var/www/html/kill.sh") | crontab -
-    
+    (crontab -l | grep . ; echo -e "* * * * * /var/www/html/cronjob.sh") | crontab -
 }
 
 installationInfo(){
@@ -358,25 +449,30 @@ installationInfo(){
     printf "%s" "$bannerText"
     echo -e "\n"
     printf "Panel Link : $httpProtcol://${ipv4}:$panelPort/login"
-    printf "\nUserName : \e[31m${username}\e[0m "
+    printf "\nUsername : \e[31m${username}\e[0m "
     printf "\nPassword : \e[31m${password}\e[0m "
     printf "\nSSH Port : \e[31m${sshPort}\e[0m "
     printf "\nUDP Port : \e[31m${udpPort}\e[0m \n\n"
 }
-
 
 runSystemServices(){
     sudo systemctl restart apache2
     sudo systemctl restart sshd
 }
 
+runMigrataion(){
+    migrateUrl=$(echo "$httpProtcol://$ipv4:$panelPort/migrate")
+    curl -s $migrateUrl
+    rm /var/www/html/index.html
+}
+
 ipv4=$(getServerIpV4)
-appVersion=1.1
+appVersion=1.2
 username="admin"
 password="123456"
 udpPort=7300
-sshPort=22
-panelPort=8081
+sshPort=$(getSshPort)
+panelPort=$(getPanelPort)
 httpProtcol="http"
 panelPath=$(getPanelPath)
 nethogsLink=https://raw.githubusercontent.com/mahmoud-ap/nethogs-json/master/install.sh
@@ -386,10 +482,11 @@ userInputs
 updateShhConfig
 installPackages
 copyPanelRepo
-configAppche
+configAppache
 installNethogs
 installSshCall
 configDatabase
 configCronMaster
 runSystemServices
+runMigrataion
 installationInfo
