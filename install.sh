@@ -335,7 +335,6 @@ installNethogs(){
 configDatabase(){
     dbName="RocketSSH"
     dbPrefix="cp_"
-    appVersion=$(getAppVersion)
     mysql -e "create database $dbName;" &
     wait
     mysql -e "CREATE USER '${username}'@'localhost' IDENTIFIED BY '${password}';" &
