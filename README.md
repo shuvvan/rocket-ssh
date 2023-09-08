@@ -44,7 +44,7 @@ Ubuntu 18+<br>
 برای نصب دستور زیر را وارد کنید<br>
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/mahmoud-ap/rocket-ssh/master/install.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/install.sh --ipv4)
 ```
 
 # آپدیت پنل ادمین
@@ -52,7 +52,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/mahmoud-ap/rocket-ssh/master/i
 نیازی به نصب مجدد نیست . با این روش فقط پنل ادمین آپدیت می شود . در این روش اطلاعات دیتابیس تغییر نمی کند
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/mahmoud-ap/rocket-ssh/master/update-panel.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/update-panel.sh --ipv4)
 ```
 
 # بلاک کردن آی پی های ایران
@@ -60,10 +60,10 @@ bash <(curl -Ls https://raw.githubusercontent.com/mahmoud-ap/rocket-ssh/master/u
 جهت بلاک کردن آی پی های ایران از دستور زیر استفاده کنید
 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/mahmoud-ap/rocket-ssh/master/block-ir-ip.sh --ipv4)
+bash <(curl -Ls https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/block-ir-ip.sh --ipv4)
 ```
 
-# ❤️ حمایت = دلگرمی ❤️
+# ❤️ حمایت = دلگرمی از برنامه نویس پروژه (محمود) ❤️
 
 TRX
 
@@ -71,9 +71,6 @@ TRX
 TFU4acBKt1pQgog2s22pHp7WrXjJWjKZhH
 ```
 
-# کانال تلگرام
-
-https://t.me/rocket_ssh
 
 # محیط نرم افزار
 
