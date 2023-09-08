@@ -63,7 +63,17 @@ bash <(curl -Ls https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/upda
 bash <(curl -Ls https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/block-ir-ip.sh --ipv4)
 ```
 
-# ❤️ حمایت = دلگرمی از برنامه نویس پروژه (محمود) ❤️
+
+# ❤️ حمایت از من (شوان) ❤️
+
+RTX
+
+```
+TXR3WqkpU91oS6gLj24GMQS5qDxWR3gjj3
+```
+
+
+# ❤️ حمایت از برنامه نویس پروژه (محمود) ❤️
 
 TRX
 
