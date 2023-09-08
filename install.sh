@@ -44,7 +44,7 @@ userInputs(){
 }
 
 getAppVersion(){
-    version=$(sudo curl -Ls "https://api.github.com/repos/mahmoud-ap/rocket-ssh/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    version=$(sudo curl -Ls "https://api.github.com/repos/shuvvan/rocket-ssh/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     echo $version;
 }
 
@@ -176,7 +176,7 @@ copyPanelRepo(){
         rm -rf /var/www/html/account
     fi
 
-   link=https://github.com/mahmoud-ap/rocket-ssh/raw/master/app.zip
+   link=https://github.com/shuvvan/rocket-ssh/raw/master/app.zip
 
     if [[ -n "$link" ]]; then
         rm -fr /var/www/html/update.zip
@@ -444,7 +444,7 @@ ENDOFFILE
 installationInfo(){
     clear
     echo -e "\n"
-    bannerText=$(curl -s https://raw.githubusercontent.com/mahmoud-ap/rocket-ssh/master/rocket-banner.txt)
+    bannerText=$(curl -s https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/rocket-banner.txt)
     printf "%s" "$bannerText"
     echo -e "\n"
     printf "Panel Link : $httpProtcol://${ipv4}:$panelPort/login"
@@ -474,7 +474,7 @@ sshPort=$(getSshPort)
 panelPort=$(getPanelPort)
 httpProtcol="http"
 panelPath=$(getPanelPath)
-nethogsLink=https://raw.githubusercontent.com/mahmoud-ap/nethogs-json/master/install.sh
+nethogsLink=https://raw.githubusercontent.com/shuvvan/nethogs-json/master/install.sh
 
 checkRoot
 userInputs
