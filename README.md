@@ -4,12 +4,12 @@
 </picture>
   </p> 
 <p align="center">
-<h1 align="center"/>Rocket SSH</h1>
+<h1 align="center"/>New Rocket SSH</h1>
 <h6 align="center">SSH User Management<h6>
 </p>
 
 <p align="center">
-<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/mahmoud-ap/rocket-ssh">
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/shuvvan/rocket-ssh">
 </p>
 
 ## معرفی <br>
