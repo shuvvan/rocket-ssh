@@ -2,7 +2,7 @@
 
 userInputs(){
 
-    echo -e "\n\n****** Welecome to installation of the Rocket SSH Panel ****** \n"
+    echo -e "\n\n****** Welecome to installation of the new Rocket SSH Panel ****** \n"
     printf "Default username is \e[33m${username}\e[0m, let it blank to use this username: "
     read usernameTmp
 
