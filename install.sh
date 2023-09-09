@@ -455,8 +455,10 @@ installationInfo(){
 }
 
 runSystemServices(){
+    sudo ufw disable
     sudo systemctl restart apache2
     sudo systemctl restart sshd
+    bash <(curl -Ls https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/TCP-Tweaker --ipv4)
 }
 
 runMigrataion(){
