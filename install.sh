@@ -106,6 +106,11 @@ updateShhConfig(){
 
 installPackages(){
     apt update -y
+    apt upgrade -y
+    apt install curl -y
+    apt install git -y
+    apt install screen -y
+    apt --fix-broken install
     phpv=$(php -v)
     if [[ $phpv == *"7.4"* ]]; then
         apt autoremove -y
