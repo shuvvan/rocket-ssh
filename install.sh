@@ -383,7 +383,7 @@ configDatabase(){
     else
         mysql -u ${username} --password=${password} ${dbName} < /var/www/html/panel/assets/backup/db.sql
         wait
-        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}admins  (username, password, fullname, role, credit, is_active, ctime, utime) VALUES ('${username}', '${hashedPassword}', 'مدیر', 'admin', '0', '1', '${nowTime}','0');"
+        mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}admins  (username, password, fullname, role, credit, is_active, ctime, utime) VALUES ('${username}', '${hashedPassword}', 'modir', 'admin', '0', '1', '${nowTime}','0');"
         mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}settings (name, value) VALUES ('ssh_port','${sshPort}');"
         mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}settings (name, value) VALUES ('udp_port','${udpPort}');"
         mysql -e "USE ${dbName}; INSERT INTO ${dbPrefix}settings (name, value) VALUES ('app_version','${appVersion}');"
