@@ -12,7 +12,7 @@
 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/shuvvan/rocket-ssh">
 </p>
 
-## معرفی <br>
+## معرفی (توجه کنید که پروژه صرفا جهت یادگیری زبانها و بالابردن سطح میباشد! پس ممکنه خطاهایی وجود داشته باشد) <br> 
 
 نیو راکت اس اس اچ پنل یک نرم افزار تحت وب جهت مدیریت اکانت SSH می باشد.
 
