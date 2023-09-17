@@ -58,7 +58,9 @@ bash <(curl -Ls https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/inst
 ```
 
 # فعالسازی SSL
+```
 bash <(curl -Ls https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/ssl.sh --ipv4)
+```
 
 # آپدیت پنل ادمین
 
