@@ -57,6 +57,9 @@ Ubuntu 18+<br>
 bash <(curl -Ls https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/install.sh --ipv4)
 ```
 
+# فعالسازی SSL
+bash <(curl -Ls https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/ssl.sh --ipv4)
+
 # آپدیت پنل ادمین
 
 نیازی به نصب مجدد نیست . با این روش فقط پنل ادمین آپدیت می شود . در این روش اطلاعات دیتابیس تغییر نمی کند
