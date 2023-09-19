@@ -15,7 +15,7 @@ center_x=$((columns / 2))
 center_y=$((lines / 2))
 
 # Define the welcome message
-message="Welcome into the script"
+message="Welcome into my script"
 # Sleep for 3 seconds
 sleep 3
 # Calculate the starting position for the message
