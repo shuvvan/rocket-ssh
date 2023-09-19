@@ -41,9 +41,6 @@ userInputs(){
 # Sleep for 2 seconds
 sleep 1
 
-    # Clear the screen
-clear
-
     printf "Default username for \e[31mNew Rocket Panel\e[0m is \e[34m${username}\e[0m, let it blank to use this username: "
     read usernameTmp
 
@@ -62,9 +59,6 @@ sleep 1
 # Sleep for 2 seconds
 sleep 1
 
-    # Clear the screen
-clear
-
     printf "Default password for \e[31mNew Rocket Panel\e[0m is \e[34m${password}\e[0m, let it blank to use this password: "
     read passwordTmp
 
@@ -82,9 +76,6 @@ sleep 1
 
 # Sleep for 2 seconds
 sleep 1
-
-    # Clear the screen
-clear
 
     printf "Default \e[31mNew Rocket UDPGW Port\e[0m is \e[34m${udpPort}\e[0m, let it blank to use this Port: "
     read udpPortTmp
@@ -105,9 +96,6 @@ sleep 1
 # Sleep for 2 seconds
 sleep 1
 
-    # Clear the screen
-clear
-
     printf "Default \e[31mNew Rocket SSH Port\e[0m is \e[34m${sshPort}\e[0m, let it blank to use this Port: "
     read sshPortTmp
 
@@ -125,9 +113,6 @@ sleep 1
 
 # Sleep for 2 seconds
 sleep 1
-
-    # Clear the screen
-clear
 
     printf "Default \e[31mNew Rocket WebPanel Port\e[0m is \e[34m${panelPort}\e[0m, let it blank to use this Port: "
     read panelPortTmp
