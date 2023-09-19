@@ -36,7 +36,7 @@ clear
 
 
 userInputs(){
-    echo -e "\n \u001b[33m****** \e[1mPanel Admin Username\e[0m ******\u001b[0m \n"
+    echo -e "\n \e[1m \e[34m ****** Panel Admin Username ****** \e[0m \n"
     printf "Default username for \e[31mNew Rocket Panel\e[0m is \e[34m${username}\e[0m, let it blank to use this username: "
     read usernameTmp
 
@@ -50,7 +50,7 @@ clear
 # Sleep for 2 seconds
 sleep 1
 
-    echo -e "\n \u001b[33m****** \e[1mPanel Admin Password\e[0m ******\u001b[0m \n"
+    echo -e "\n \e[1m \e[34m ****** Panel Admin Password ****** \e[0m \n"
     printf "Default password for \e[31mNew Rocket Panel\e[0m is \e[34m${password}\e[0m, let it blank to use this password: "
     read passwordTmp
 
