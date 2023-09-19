@@ -15,14 +15,14 @@ center_x=$((columns / 2))
 center_y=$((lines / 2))
 
 # Define the welcome message
-message="Welcome to the 'New Rocket Panel' installation process"
+message="\e[31mWelcome to the 'New Rocket Panel' installation process\e[0m"
 
 # Calculate the starting position for the message
 start_x=$((center_x - (${#message} / 2)))
 
 # Display the welcome message in the center of the screen
 tput cup $center_y $start_x
-echo "$message"
+echo -e "$message"
 
 # Sleep for 3 seconds for wait message
 sleep 3
