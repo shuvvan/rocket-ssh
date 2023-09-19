@@ -4,9 +4,6 @@
 # Clear the screen
 clear
 
-# Sleep for 3 seconds
-sleep 3
-
 # Get the dimensions of the terminal
 columns=$(tput cols)
 lines=$(tput lines)
@@ -24,6 +21,8 @@ start_x=$((center_x - (${#message} / 2)))
 # Display the welcome message in the center of the screen
 tput cup $center_y $start_x
 echo "$message"
+# Sleep for 3 seconds
+sleep 3
 
 # Rest of your script here...
 
