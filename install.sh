@@ -37,7 +37,7 @@ clear
 
 userInputs(){
 
-    printf "Default username for \e[31mNew Rocket Panel\e[0m is \e[33m${username}\e[0m, let it blank to use this username: "
+    printf u"\u001b"Default username for \e[31mNew Rocket Panel\e[0m is \e[34m${username}\e[0m, let it blank to use this username: "[0m"
     read usernameTmp
 
     if [[ -n "${usernameTmp}" ]]; then
