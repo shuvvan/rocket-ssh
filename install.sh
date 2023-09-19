@@ -1,15 +1,21 @@
 #!/bin/bash
 
 
+
 # Clear the screen
 clear
 
-# Display a welcome message in the center of the screen
-tput cup $(tput lines / 2) $(($(tput cols / 2) - 14))
-echo "Welcome to the script"
-
 # Sleep for 3 seconds
 sleep 3
+
+# Calculate the center position of the screen
+center_x=$((($(tput cols) - ${#message}) / 2))
+center_y=$(($(tput lines) / 2))
+
+# Display a welcome message in the center of the screen
+tput cup $center_y $center_x
+message="Welcome to the script"
+echo "$message"
 
 # Rest of your script here...
 
