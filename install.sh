@@ -15,7 +15,7 @@ center_x=$((columns / 2))
 center_y=$((lines / 2))
 
 # Define the welcome message
-message="\e[1m\e[31mWelcome to the 'New Rocket Panel' installation process\e[0m"
+message="\e[2m\e[31mWelcome to the 'New Rocket Panel' installation process\e[0m"
 
 # Calculate the starting position for the message
 start_x=$((center_x - (${#message} / 2)))
