@@ -36,7 +36,7 @@ clear
 
 
 userInputs(){
-
+    echo -e "\n\n****** Welcome to the 'New Rocket Panel' installation information. ****** \n"
     printf "Default username for \e[31mNew Rocket Panel\e[0m is \e[34m${username}\e[0m, let it blank to use this username: "
     read usernameTmp
 
@@ -52,7 +52,7 @@ sleep 1
 
 
     echo -e "\nPlease input New Rocket Panel [admin password]."
-    printf "Default password is \e[33m${password}\e[0m, let it blank to use this password: "
+    printf "Default password is \e[34m${password}\e[0m, let it blank to use this password: "
     read passwordTmp
 
     if [[ -n "${passwordTmp}" ]]; then
