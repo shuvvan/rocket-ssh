@@ -3,7 +3,7 @@
 # Clear the screen
 clear
 
-# Sleep for 1 seconds
+# Sleep for 1  seconds
 sleep 1
 
 # Get the dimensions of the terminal
