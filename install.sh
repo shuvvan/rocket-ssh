@@ -44,11 +44,12 @@ userInputs(){
      username=${usernameTmp}
     fi
     
+# Clear the screen
+clear
+
 # Sleep for 2 seconds
 sleep 2
 
-# Clear the screen
-clear
 
     echo -e "\nPlease input New Rocket Panel [admin password]."
     printf "Default password is \e[33m${password}\e[0m, let it blank to use this password: "
@@ -57,6 +58,13 @@ clear
     if [[ -n "${passwordTmp}" ]]; then
      password=${passwordTmp}
     fi
+    
+# Clear the screen
+clear
+
+# Sleep for 2 seconds
+sleep 2
+
 
     echo -e "\nPlease input [UDPGW Port] for videocall."
     printf "Default Port is \e[33m${udpPort}\e[0m, let it blank to use this Port: "
@@ -65,6 +73,13 @@ clear
     if [[ -n "${udpPortTmp}" ]]; then
      udpPort=${udpPortTmp}
     fi
+    
+# Clear the screen
+clear
+
+# Sleep for 2 seconds
+sleep 2
+
 
     echo -e "\nPlease input [SSH Port] for connections."
     printf "Default Port is \e[33m${sshPort}\e[0m, let it blank to use this Port: "
