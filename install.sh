@@ -21,7 +21,7 @@ sleep 2
 message="This project is only for learning' installation process"
 clear
 sleep 2
-message="I have no responsibility for your information' installation process"
+message="I have no responsibility for your information"
 
 
 # Calculate the starting position for the message
