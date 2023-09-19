@@ -4,7 +4,7 @@
 clear
 
 # Sleep for 3 seconds
-sleep 3
+sleep 1
 
 # Get the dimensions of the terminal
 columns=$(tput cols)
@@ -15,7 +15,7 @@ center_x=$((columns / 2))
 center_y=$((lines / 2))
 
 # Define the welcome message
-message="Welcome into my new script"
+message="Welcome to the 'New Rocket Panel' installation process."
 
 # Calculate the starting position for the message
 start_x=$((center_x - (${#message} / 2)))
@@ -23,8 +23,64 @@ start_x=$((center_x - (${#message} / 2)))
 # Display the welcome message in the center of the screen
 tput cup $center_y $start_x
 echo "$message"
+
+# Clear the screen
+clear
+
+# Sleep for 3 seconds
+sleep 1
+
+# Get the dimensions of the terminal
+columns=$(tput cols)
+lines=$(tput lines)
+
+# Calculate the center position for the message
+center_x=$((columns / 2))
+center_y=$((lines / 2))
+
+# Define the welcome message
+message="This project is only for learning."
+
+# Calculate the starting position for the message
+start_x=$((center_x - (${#message} / 2)))
+
+# Display the welcome message in the center of the screen
+tput cup $center_y $start_x
+echo "$message"
+
+
+# Clear the screen
+clear
+
+# Sleep for 3 seconds
+sleep 1
+
+# Get the dimensions of the terminal
+columns=$(tput cols)
+lines=$(tput lines)
+
+# Calculate the center position for the message
+center_x=$((columns / 2))
+center_y=$((lines / 2))
+
+# Define the welcome message
+message="I have no responsibility for your information."
+
+# Calculate the starting position for the message
+start_x=$((center_x - (${#message} / 2)))
+
+# Display the welcome message in the center of the screen
+tput cup $center_y $start_x
+echo "$message"
+
+
+
 # Sleep for 3 seconds
 sleep 3
+
+
+
+
 # Rest of your script here...
 
 
