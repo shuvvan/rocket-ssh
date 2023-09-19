@@ -23,18 +23,7 @@ start_x=$((center_x - (${#message} / 2)))
 # Display the welcome message in the center of the screen
 tput cup $center_y $start_x
 echo "$message"
-clear
-sleep 1
 
-# Define the welcome message
-message2="installation process"
-
-# Calculate the starting position for the message
-start_x=$((center_x - (${#message2} / 2)))
-
-# Display the welcome message in the center of the screen
-tput cup $center_y $start_x
-echo "$message2"
 
 clear
 # Sleep for 2 seconds
