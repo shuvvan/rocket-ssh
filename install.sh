@@ -10,7 +10,7 @@ clear
 
 
 center_x=$((columns / 2)) center_y=$((lines / 2))
-
+start_x=$((center_x - (${#message} / 2)))
 echo "Welcome to the script"
 
 # Sleep for 3 seconds
