@@ -8,7 +8,8 @@ clear
 
 # Display a welcome message in the center of the screen
 
-
+columns=$(tput cols)
+lines=$(tput lines)
 center_x=$((columns / 2)) center_y=$((lines / 2))
 start_x=$((center_x - (${#message} / 2)))
 echo "Welcome to the script"
