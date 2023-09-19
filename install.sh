@@ -15,7 +15,7 @@ center_x=$((columns / 2))
 center_y=$((lines / 2))
 
 # Define the welcome message
-message="Welcome to the script"
+message="Welcome into the script"
 
 # Calculate the starting position for the message
 start_x=$((center_x - (${#message} / 2)))
