@@ -17,12 +17,12 @@ message="Welcome to the script"
 
 # Calculate the starting position for the message
 start_x=$((center_x - (${#message} / 2)))
-
+# Sleep for 3 seconds
+sleep 3
 # Display the welcome message in the center of the screen
 tput cup $center_y $start_x
 echo "$message"
-# Sleep for 3 seconds
-sleep 3
+
 
 # Rest of your script here...
 
