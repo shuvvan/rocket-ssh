@@ -4,7 +4,8 @@
 clear
 
 # Display a welcome message in the center of the screen
-tput cup $(tput lines / 2) $(($(tput cols / 2) - 140))
+center_y=$(tput lines / 2) 
+center_x=$(($(tput cols / 2) - 14))
 echo "Welcome to the script"
 
 # Sleep for 3 seconds
