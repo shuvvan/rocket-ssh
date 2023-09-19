@@ -9,8 +9,8 @@ clear
 sleep 3
 
 # Calculate the center position of the screen
-center_x=$((($(tput cols) - ${#message}) / 10))
-center_y=$(($(tput lines) / 20))
+center_x=$((($(tput cols) - ${#message}) / 0))
+center_y=$(($(tput lines) / 0))
 
 # Display a welcome message in the center of the screen
 tput cup $center_y $center_x
