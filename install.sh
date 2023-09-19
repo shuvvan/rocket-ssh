@@ -5,7 +5,7 @@ clear
 
 # Display a welcome message in the center of the screen
 tput cup $(tput lines / 2) $(($(tput cols / 2) - 14))
-echo "\n\n****** Welcome to the 'New Rocket Panel' installation process. This project is only for learning. I have no responsibility for your information. ****** \n"
+echo "\n\n****** Welcome to the 'New Rocket Panelخوش آمدید' installation process. This project is only for learning. I have no responsibility for your information. ****** \n"
 
 # Sleep for 3 seconds
 sleep 5
