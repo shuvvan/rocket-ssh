@@ -1,4 +1,9 @@
 #!/bin/bash
+# Clear the screen
+clear
+
+# Sleep for 3 seconds
+sleep 3
 
 userInputs(){
 
