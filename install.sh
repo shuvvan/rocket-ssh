@@ -1,14 +1,10 @@
 #!/bin/bash
 
-
-#!/bin/bash
-
 # Clear the screen
 clear
 
 # Display a welcome message in the center of the screen
-
-tput cup $center_x=$((columns / 2000)) center_y=$((lines / 2000))
+tput cup $(tput lines / 2) $(($(tput cols / 2) - 14))
 echo "Welcome to the script"
 
 # Sleep for 3 seconds
@@ -18,6 +14,7 @@ sleep 3
 clear
 
 # Rest of your script here...
+
 
 
 userInputs(){
