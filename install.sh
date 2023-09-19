@@ -3,9 +3,6 @@
 # Clear the screen
 clear
 
-# Sleep for 1 seconds
-sleep 1
-
 # Get the dimensions of the terminal
 columns=$(tput cols)
 lines=$(tput lines)
@@ -48,7 +45,7 @@ userInputs(){
 clear
 
 # Sleep for 2 seconds
-sleep 2
+sleep 1
 
 
     echo -e "\nPlease input New Rocket Panel [admin password]."
@@ -63,7 +60,7 @@ sleep 2
 clear
 
 # Sleep for 2 seconds
-sleep 2
+sleep 1
 
 
     echo -e "\nPlease input [UDPGW Port] for videocall."
@@ -78,7 +75,7 @@ sleep 2
 clear
 
 # Sleep for 2 seconds
-sleep 2
+sleep 1
 
 
     echo -e "\nPlease input [SSH Port] for connections."
@@ -88,6 +85,13 @@ sleep 2
     if [[ -n "${sshPortTmp}" ]]; then
      sshPort=${sshPortTmp}
     fi
+    
+# Clear the screen
+clear
+
+# Sleep for 2 seconds
+sleep 1
+
 
     echo -e "\nPlease input [Panel Port] To enter the New Rocket Panel."
     printf "Default Port is \e[33m${panelPort}\e[0m, let it blank to use this Port: "
@@ -96,6 +100,15 @@ sleep 2
     if [[ -n "${panelPortTmp}" ]]; then
      panelPort=${panelPortTmp}
     fi
+
+        
+# Clear the screen
+clear
+
+# Sleep for 2 seconds
+sleep 1
+
+
 }
 
 getAppVersion(){
