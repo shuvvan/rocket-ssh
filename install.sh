@@ -3,7 +3,7 @@
 # Clear the screen
 clear
 
-# Sleep for 3 seconds
+# Sleep for 1 seconds
 sleep 1
 
 # Get the dimensions of the terminal
@@ -25,7 +25,9 @@ tput cup $center_y $start_x
 echo "$message"
 
 
+# Clear the screen
 clear
+
 # Sleep for 2 seconds
 sleep 2
 
