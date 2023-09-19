@@ -36,7 +36,7 @@ clear
 
 
 userInputs(){
-    echo -e "\n\n\n\n\n\n \e[1m \e[33m ****** Panel Admin Username ****** \e[0m \n"
+    echo -e "\n \e[1m \e[33m ****** Panel Admin Username ****** \e[0m \n"
     printf "Default username for \e[31mNew Rocket Panel\e[0m is \e[34m${username}\e[0m, let it blank to use this username: "
     read usernameTmp
 
