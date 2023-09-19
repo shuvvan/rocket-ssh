@@ -18,7 +18,7 @@ center_y=$((lines / 2))
 message="Welcome to the 'New Rocket Panel' installation process"
 clear
 sleep 2
-message="This project is only for learning' installation process"
+message="This project is only for learning"
 clear
 sleep 2
 message="I have no responsibility for your information"
