@@ -15,16 +15,16 @@ center_x=$((columns / 2))
 center_y=$((lines / 2))
 
 # Define the welcome message
-message="Welcome into my script"
-# Sleep for 3 seconds
-sleep 3
+message="Welcome into my new script"
+
 # Calculate the starting position for the message
 start_x=$((center_x - (${#message} / 2)))
 
 # Display the welcome message in the center of the screen
 tput cup $center_y $start_x
 echo "$message"
-
+# Sleep for 3 seconds
+sleep 3
 # Rest of your script here...
 
 
