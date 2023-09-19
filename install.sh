@@ -64,7 +64,7 @@ center_x=$((columns / 2))
 center_y=$((lines / 2))
 
 # Define the welcome message
-message="I have no responsibility for your information."
+message="I have no "
 
 # Calculate the starting position for the message
 start_x=$((center_x - (${#message} / 2)))
