@@ -38,11 +38,11 @@ clear
 userInputs(){
     echo -e "\n \e[1m \e[33m ****** Panel Admin Username ****** \e[0m \n"
 
-    # Clear the screen
-clear
-
 # Sleep for 2 seconds
 sleep 1
+
+    # Clear the screen
+clear
 
     printf "Default username for \e[31mNew Rocket Panel\e[0m is \e[34m${username}\e[0m, let it blank to use this username: "
     read usernameTmp
@@ -59,11 +59,11 @@ sleep 1
 
     echo -e "\n \e[1m \e[33m ****** Panel Admin Password ****** \e[0m \n"
 
-    # Clear the screen
-clear
-
 # Sleep for 2 seconds
 sleep 1
+
+    # Clear the screen
+clear
 
     printf "Default password for \e[31mNew Rocket Panel\e[0m is \e[34m${password}\e[0m, let it blank to use this password: "
     read passwordTmp
@@ -80,11 +80,11 @@ sleep 1
 
     echo -e "\n \e[1m \e[33m ****** VideoCall System ****** \e[0m \n"
 
-    # Clear the screen
-clear
-
 # Sleep for 2 seconds
 sleep 1
+
+    # Clear the screen
+clear
 
     printf "Default \e[31mNew Rocket UDPGW Port\e[0m is \e[34m${udpPort}\e[0m, let it blank to use this Port: "
     read udpPortTmp
@@ -102,11 +102,11 @@ sleep 1
 
     echo -e "\n \e[1m \e[33m ****** SSH Connections System ****** \e[0m \n"
 
-    # Clear the screen
-clear
-
 # Sleep for 2 seconds
 sleep 1
+
+    # Clear the screen
+clear
 
     printf "Default \e[31mNew Rocket SSH Port\e[0m is \e[34m${sshPort}\e[0m, let it blank to use this Port: "
     read sshPortTmp
@@ -123,11 +123,11 @@ sleep 1
 
     echo -e "\n \e[1m \e[33m ****** WebPanel Connections PORT ****** \e[0m \n"
 
-# Clear the screen
-clear
-
 # Sleep for 2 seconds
 sleep 1
+
+    # Clear the screen
+clear
 
     printf "Default \e[31mNew Rocket WebPanel Port\e[0m is \e[34m${panelPort}\e[0m, let it blank to use this Port: "
     read panelPortTmp
