@@ -25,7 +25,7 @@ tput cup $center_y $start_x
 echo "$message"
 
 # Sleep for 2 seconds
-sleep 3
+sleep 2
 
 # Clear the screen
 clear
@@ -43,6 +43,12 @@ userInputs(){
     if [[ -n "${usernameTmp}" ]]; then
      username=${usernameTmp}
     fi
+    
+# Sleep for 2 seconds
+sleep 2
+
+# Clear the screen
+clear
 
     echo -e "\nPlease input New Rocket Panel [admin password]."
     printf "Default password is \e[33m${password}\e[0m, let it blank to use this password: "
