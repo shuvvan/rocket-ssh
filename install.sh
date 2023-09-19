@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Clear the screen
+#Clear the screen
 clear
 
 # Sleep for 1  seconds
