@@ -10,9 +10,9 @@ clear
 
 tput cup center_x=$((columns / 2)) center_y=$((lines / 2))
 start_x=$((center_x - (${#message} / 2)))
-tput cup $center_y $start_x
-echo "Welcome to the script"
 
+echo "Welcome to the script"
+tput cup $center_y $start_x
 
 # Sleep for 3 seconds
 sleep 3
