@@ -16,7 +16,8 @@ center_y=$((lines / 2))
 
 # Define the welcome message
 message="Welcome into the script"
-
+# Sleep for 3 seconds
+sleep 3
 # Calculate the starting position for the message
 start_x=$((center_x - (${#message} / 2)))
 
