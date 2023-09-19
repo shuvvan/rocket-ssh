@@ -15,14 +15,7 @@ center_x=$((columns / 2))
 center_y=$((lines / 2))
 
 # Define the welcome message
-message="Welcome to the 'New Rocket Panel' installation process"
-clear
-sleep 2
-message="This project is only for learning"
-clear
-sleep 2
-message="I have no responsibility for your information"
-
+message="Welcome to the 'New Rocket Panel'"
 
 # Calculate the starting position for the message
 start_x=$((center_x - (${#message} / 2)))
@@ -30,8 +23,23 @@ start_x=$((center_x - (${#message} / 2)))
 # Display the welcome message in the center of the screen
 tput cup $center_y $start_x
 echo "$message"
-# Sleep for 3 seconds
+clear
+sleep 1
+
+# Define the welcome message
+message="installation process"
+
+# Calculate the starting position for the message
+start_x=$((center_x - (${#message} / 2)))
+
+# Display the welcome message in the center of the screen
+tput cup $center_y $start_x
+echo "$message"
+
+clear
+# Sleep for 2 seconds
 sleep 2
+
 # Rest of your script here...
 
 
