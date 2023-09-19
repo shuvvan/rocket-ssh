@@ -3,17 +3,29 @@
 # Clear the screen
 clear
 
-# Display a welcome message in the center of the screen
-tput cup $(tput lines / 2) $(($(tput cols / 2) - 14))
-echo "\n\n****** Welcome to the 'New Rocket Panelخوش آمدید' installation process. This project is only for learning. I have no responsibility for your information. ****** \n"
-
 # Sleep for 3 seconds
-sleep 5
+sleep 3
 
-# Clear the screen again
-clear
+# Get the dimensions of the terminal
+columns=$(tput cols)
+lines=$(tput lines)
+
+# Calculate the center position for the message
+center_x=$((columns / 2))
+center_y=$((lines / 2))
+
+# Define the welcome message
+message="Welcome to the script"
+
+# Calculate the starting position for the message
+start_x=$((center_x - (${#message} / 2)))
+
+# Display the welcome message in the center of the screen
+tput cup $center_y $start_x
+echo "$message"
 
 # Rest of your script here...
+
 
 
 
