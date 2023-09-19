@@ -4,21 +4,12 @@
 # Clear the screen
 clear
 
-# URL of the logo image on GitHub
-logo_url="https://raw.githubusercontent.com/mahmoud-ap/rocket-ssh/master/images/logo.png"
-
-# Download the logo to a temporary file
-temp_logo_file="/tmp/logo.png"
-wget -O "$temp_logo_file" "$logo_url"
-
-# Display the logo in the center of the screen using feh
-feh --bg-center "$temp_logo_file"
+# Display a welcome message in the center of the screen
+tput cup $(tput lines / 2) $(($(tput cols / 2) - 14))
+echo "Welcome to the script"
 
 # Sleep for 3 seconds
 sleep 3
-
-# Remove the temporary logo file
-rm -f "$temp_logo_file"
 
 # Rest of your script here...
 
