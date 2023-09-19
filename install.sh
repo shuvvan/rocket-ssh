@@ -8,12 +8,8 @@ clear
 
 # Display a welcome message in the center of the screen
 
-tput cup center_x=$((columns / 2)) center_y=$((lines / 2))
-
-
+tput cup $center_x=$((columns / 2)) center_y=$((lines / 2))
 echo "Welcome to the script"
-start_x=$((center_x - (${#message} / 2)))
-tput cup $center_y $start_x
 
 # Sleep for 3 seconds
 sleep 3
