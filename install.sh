@@ -3,6 +3,9 @@
 # Clear the screen
 clear
 
+# Sleep for 1 seconds
+sleep 1
+
 # Get the dimensions of the terminal
 columns=$(tput cols)
 lines=$(tput lines)
@@ -21,8 +24,8 @@ start_x=$((center_x - (${#message} / 2)))
 tput cup $center_y $start_x
 echo "$message"
 
-# Sleep for 4 seconds for wait message
-sleep 4
+# Sleep for 3 seconds for wait message
+sleep 3
 
 # Clear the screen
 clear
