@@ -24,13 +24,13 @@ start_x=$((center_x - (${#message} / 2)))
 tput cup $center_y $start_x
 echo "$message"
 
-# Clear the screen
-clear
+
 # Sleep for 2 seconds
 sleep 2
 
 
-
+# Clear the screen
+clear
 
 # Rest of your script here...
 
