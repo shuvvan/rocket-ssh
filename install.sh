@@ -36,7 +36,7 @@ clear
 
 
 userInputs(){
-    echo -e "\n \e[1m \e[34m ****** Panel Admin Username ****** \e[0m \n"
+    echo -e "\n \e[1m \e[33m ****** Panel Admin Username ****** \e[0m \n"
     printf "Default username for \e[31mNew Rocket Panel\e[0m is \e[34m${username}\e[0m, let it blank to use this username: "
     read usernameTmp
 
@@ -50,7 +50,7 @@ clear
 # Sleep for 2 seconds
 sleep 1
 
-    echo -e "\n \e[1m \e[34m ****** Panel Admin Password ****** \e[0m \n"
+    echo -e "\n \e[1m \e[33m ****** Panel Admin Password ****** \e[0m \n"
     printf "Default password for \e[31mNew Rocket Panel\e[0m is \e[34m${password}\e[0m, let it blank to use this password: "
     read passwordTmp
 
@@ -64,9 +64,8 @@ clear
 # Sleep for 2 seconds
 sleep 1
 
-
-    echo -e "\nPlease input [UDPGW Port] for videocall."
-    printf "Default Port is \e[33m${udpPort}\e[0m, let it blank to use this Port: "
+    echo -e "\n \e[1m \e[33m ****** VideoCall System ****** \e[0m \n"
+    printf "Default \e[31mNew Rocket UDPGW Port\e[0m is \e[34m${udpPort}\e[0m, let it blank to use this Port: "
     read udpPortTmp
 
     if [[ -n "${udpPortTmp}" ]]; then
@@ -80,8 +79,8 @@ clear
 sleep 1
 
 
-    echo -e "\nPlease input [SSH Port] for connections."
-    printf "Default Port is \e[33m${sshPort}\e[0m, let it blank to use this Port: "
+    echo -e "\n \e[1m \e[33m ****** SSH Connections System ****** \e[0m \n"
+    printf "Default \e[31mNew Rocket SSH Port\e[0m is \e[34m${sshPort}\e[0m, let it blank to use this Port: "
     read sshPortTmp
 
     if [[ -n "${sshPortTmp}" ]]; then
