@@ -1,6 +1,6 @@
 <p align="center">
 <picture>
-<img width="160" height="200"  alt="New Rocket" src="https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/images/newlogo.png">
+<img width="190" height="280"  alt="New Rocket" src="https://raw.githubusercontent.com/shuvvan/rocket-ssh/master/images/newlogo.png">
 </picture>
   </p> 
 <p align="center">
